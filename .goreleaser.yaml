@@ -42,9 +42,9 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - ghcr.io/jpbede/{{ .ProjectName }}:latest
-      - ghcr.io/jpbede/{{ .ProjectName }}:{{ .Tag }}
-      - ghcr.io/jpbede/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}
+      - "ghcr.io/jpbede/{{ .ProjectName }}:latest"
+      - "ghcr.io/jpbede/{{ .ProjectName }}:{{ .Tag }}"
+      - "ghcr.io/jpbede/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
 
 nfpms:
   - id: ratiocheck
