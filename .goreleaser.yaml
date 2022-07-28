@@ -1,0 +1,82 @@
+project_name: ratiocheck
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - binary: ratiocheck
+    main: ./
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}}
+    goos:
+      - linux
+      - windows
+      - darwin
+
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+gomod:
+  proxy: true
+  env:
+    - GOPROXY=https://proxy.golang.org,direct
+    - GOSUMDB=sum.golang.org
+
+dockers:
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - ghcr.io/jpbede/{{ .ProjectName }}:latest
+      - ghcr.io/jpbede/{{ .ProjectName }}:{{ .Tag }}
+      - ghcr.io/jpbede/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}
+
+nfpms:
+  - id: ratiocheck
+    vendor: Jan-Philipp Benecke
+    maintainer: Jan-Philipp Benecke <jan-philipp@bnck.me>
+    license: MIT License
+    description: "Microservice to check image to content ration of HTML pages"
+    formats:
+      - apk
+      - deb
+      - rpm
+
+brews:
+  - name: ratiocheck
+    goarm: 6
+    tap:
+      owner: jpbede
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    commit_author:
+      name: goreleaserbot
+      email: goreleaser@carlosbecker.com
+    folder: Formula
+    homepage: "https://github.com/jpbede/ratiocheck"
+    description: "Microservice to check image to content ration of HTML pages"
+    install: |
+      bin.install "ratiocheck"
+    test: |
+      system "#{bin}/ratiocheck"
