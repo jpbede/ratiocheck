@@ -3,6 +3,9 @@ Microservice to check image to content ration of HTML pages
 
 **Please be nice to me, the project is work in progress :)**
 
+## Requirements
+When running outside the docker container a Chrome installation is required. 
+
 ## Installing
 
 ### Binaries
@@ -30,6 +33,16 @@ Simply use `homebrew` (https://brew.sh/)
 To install `ratiocheck` use following command `brew install jpbede/tap/ratiocheck`
 
 ## Using it
+
+### Shell
+
+You can run a check by issuing following command:
+
+```shell
+ratiocheck check <url to check>
+```
+
+### REST API
 
 Do an HTTP POST call to `/ratio` endpoint with following JSON body:
 
