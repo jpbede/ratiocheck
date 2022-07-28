@@ -45,7 +45,12 @@ dockers:
       - "ghcr.io/jpbede/{{ .ProjectName }}:latest"
       - "ghcr.io/jpbede/{{ .ProjectName }}:{{ .Tag }}"
       - "ghcr.io/jpbede/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
-
+    build_flag_templates:
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=\"https://github.com/jpbede/ratiocheck\""
 nfpms:
   - id: ratiocheck
     vendor: Jan-Philipp Benecke
