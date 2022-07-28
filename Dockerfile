@@ -1,4 +1,4 @@
-FROM alpine:3.16.1
+FROM chromedp/headless-shell:latest
 COPY ratiocheck /
 EXPOSE 3000
 CMD ["/ratiocheck"]
