@@ -1,7 +1,5 @@
 # ratiocheck
-Microservice to check image to content ration of HTML pages
-
-**Please be nice to me, the project is work in progress :)**
+Microservice to check image to content ratio of HTML pages
 
 ## Requirements
 When running outside the docker container a Chrome installation is required. 
@@ -33,7 +31,6 @@ Simply use `homebrew` (https://brew.sh/)
 To install `ratiocheck` use following command `brew install jpbede/tap/ratiocheck`
 
 ## Using it
-
 ### Shell
 
 You can run a check by issuing following command:
@@ -44,8 +41,26 @@ ratiocheck check <url to check>
 
 ### REST API
 
-#### URL
+#### HTML
+Do an HTTP POST call to `/html` endpoint with following JSON body:
 
+```json
+{
+  "html": "<your html>"
+}
+```
+
+As a result you will get the ratio image area to content area, the size of the content area and the size of the image area:
+
+```json
+{
+  "content_area": 1591200,
+  "image_area": 948332,
+  "ratio": 59.598541980894915
+}
+```
+
+#### URL
 Do an HTTP POST call to `/url` endpoint with following JSON body:
 
 ```json
