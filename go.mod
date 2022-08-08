@@ -6,11 +6,12 @@ require (
 	github.com/chromedp/cdproto v0.0.0-20220725225757-5988d9195a6c
 	github.com/chromedp/chromedp v0.8.3
 	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-chi/render v1.0.1
+	github.com/go-chi/render v1.0.2
 	github.com/urfave/cli/v2 v2.11.1
 )
 
 require (
+	github.com/ajg/form v1.5.1 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
