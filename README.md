@@ -44,7 +44,9 @@ ratiocheck check <url to check>
 
 ### REST API
 
-Do an HTTP POST call to `/ratio` endpoint with following JSON body:
+#### URL
+
+Do an HTTP POST call to `/url` endpoint with following JSON body:
 
 ```json
 {
