@@ -3,8 +3,8 @@ module github.com/jpbede/ratiocheck
 go 1.18
 
 require (
-	github.com/chromedp/cdproto v0.0.0-20220725225757-5988d9195a6c
-	github.com/chromedp/chromedp v0.8.3
+	github.com/chromedp/cdproto v0.0.0-20220812200530-d0d83820bffc
+	github.com/chromedp/chromedp v0.8.4
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/render v1.0.2
 	github.com/urfave/cli/v2 v2.11.1
@@ -22,5 +22,5 @@ require (
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	golang.org/x/net v0.0.0-20220728030405-41545e8bf201 // indirect
-	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10 // indirect
+	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
 )
