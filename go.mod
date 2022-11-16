@@ -1,6 +1,6 @@
 module github.com/jpbede/ratiocheck
 
-go 1.18
+go 1.19
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20220924210414-0e3390be1777
