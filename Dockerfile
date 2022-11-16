@@ -1,4 +1,5 @@
 FROM chromedp/headless-shell:latest
+RUN apt install dumb-init
 COPY ratiocheck /
 EXPOSE 3000
-ENTRYPOINT ["/ratiocheck", "l"]
+ENTRYPOINT ["dumb-init", "--", "/ratiocheck", "l"]

@@ -7,6 +7,8 @@ import (
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
+	"log"
+	"os/exec"
 	"time"
 )
 
@@ -18,7 +20,13 @@ type Result struct {
 
 func Get(parentCtx context.Context, url string) (*Result, error) {
 	ctx, cancel := chromedp.NewContext(parentCtx)
-	defer cancel()
+	defer func() {
+		cancel()
+		// Prevent Chromium processes from hanging
+		if _, err := exec.Command("pkill", "-g", "0", "Chromium").Output(); err != nil {
+			log.Println("[warn] Failed to kill Chromium processes", err)
+		}
+	}()
 
 	chromedp.WithPollingTimeout(5 * time.Second)
 
