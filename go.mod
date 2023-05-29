@@ -7,7 +7,7 @@ require (
 	github.com/chromedp/chromedp v0.9.1
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/render v1.0.2
-	github.com/urfave/cli/v2 v2.25.3
+	github.com/urfave/cli/v2 v2.25.4
 )
 
 require (
