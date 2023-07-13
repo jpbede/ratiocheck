@@ -6,7 +6,7 @@ require (
 	github.com/chromedp/cdproto v0.0.0-20230713004731-6192861feb61
 	github.com/chromedp/chromedp v0.9.1
 	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-chi/render v1.0.2
+	github.com/go-chi/render v1.0.3
 	github.com/urfave/cli/v2 v2.25.7
 )
 
