@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/chromedp/cdproto v0.0.0-20240102194822-c006b26f21c7
 	github.com/chromedp/chromedp v0.9.3
-	github.com/go-chi/chi v1.5.5
+	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/render v1.0.3
 	github.com/urfave/cli/v2 v2.27.1
