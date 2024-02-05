@@ -4,8 +4,8 @@ go 1.19
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20240202021202-6d0b6a386732
-	github.com/chromedp/chromedp v0.9.4
-	github.com/go-chi/chi/v5 v5.0.11
+	github.com/chromedp/chromedp v0.9.5
+	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/render v1.0.3
 	github.com/urfave/cli/v2 v2.27.1
@@ -23,5 +23,5 @@ require (
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	golang.org/x/net v0.7.0 // indirect
-	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/sys v0.16.0 // indirect
 )
