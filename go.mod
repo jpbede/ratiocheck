@@ -3,7 +3,7 @@ module github.com/jpbede/ratiocheck
 go 1.19
 
 require (
-	github.com/chromedp/cdproto v0.0.0-20241003230502-a4a8f7c660df
+	github.com/chromedp/cdproto v0.0.0-20241014181340-cb3a7a1d51d7
 	github.com/chromedp/chromedp v0.11.0
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.1.0
