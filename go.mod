@@ -6,7 +6,7 @@ toolchain go1.24.0
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20250318034252-a0d46a7b3aa4
-	github.com/chromedp/chromedp v0.11.2
+	github.com/chromedp/chromedp v0.13.1
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/go-chi/render v1.0.3
@@ -26,5 +26,5 @@ require (
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	golang.org/x/net v0.7.0 // indirect
-	golang.org/x/sys v0.26.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
 )
