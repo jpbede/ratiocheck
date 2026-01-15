@@ -2,7 +2,7 @@ module github.com/jpbede/ratiocheck
 
 go 1.23
 
-toolchain go1.24.0
+toolchain go1.25.6
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20250401022514-c504a7d7a18f
