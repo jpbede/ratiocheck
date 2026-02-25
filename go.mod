@@ -10,7 +10,7 @@ require (
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.2.5
 	github.com/go-chi/render v1.0.3
-	github.com/urfave/cli/v3 v3.6.2
+	github.com/urfave/cli/v2 v2.27.7
 	github.com/urfave/cli/v3 v3.6.2
 )
 
