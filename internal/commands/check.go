@@ -1,10 +1,11 @@
 package commands
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/jpbede/ratiocheck/pkg/ratio"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 func Check() *cli.Command {
@@ -17,13 +18,13 @@ func Check() *cli.Command {
 	}
 }
 
-func runCheck(c *cli.Context) error {
+func runCheck(ctx context.Context, c *cli.Command) error {
 	url := c.Args().First()
 	if url == "" {
 		return errors.New("missing url")
 	}
 
-	result, err := ratio.Get(c.Context, url)
+	result, err := ratio.Get(ctx, url)
 	if err == nil {
 		fmt.Printf("Ratio: %f %%\n", result.Ratio)
 		fmt.Printf("Image Area: %f px2\n", result.ImageArea)

@@ -1,9 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/jpbede/ratiocheck/internal/commands"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"log"
 	"os"
 )
@@ -14,7 +15,7 @@ var (
 )
 
 func main() {
-	app := &cli.App{
+	app := &cli.Command{
 		Name:        "ratio-check",
 		Usage:       "Image to content ratio check",
 		Description: "Microservice to check image to content ration of HTML pages",
@@ -26,7 +27,7 @@ func main() {
 	}
 
 	// run app
-	if err := app.Run(os.Args); err != nil {
+	if err := app.Run(context.Background(), os.Args); err != nil {
 		log.Fatal(err)
 	}
 }

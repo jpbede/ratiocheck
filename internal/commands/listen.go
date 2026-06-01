@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	"github.com/jpbede/ratiocheck/pkg/ratio"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"log"
 	"net/http"
 	"os"
@@ -35,7 +35,7 @@ func Listen() *cli.Command {
 	}
 }
 
-func runListen(c *cli.Context) error {
+func runListen(_ context.Context, c *cli.Command) error {
 	port := c.String("port")
 
 	r := chi.NewRouter()
@@ -55,7 +55,11 @@ func runListen(c *cli.Context) error {
 
 func htmlHandler(w http.ResponseWriter, r *http.Request) {
 	var input request
-	json.NewDecoder(r.Body).Decode(&input)
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		render.Status(r, http.StatusBadRequest)
+		render.JSON(w, r, map[string]string{"error": "invalid json"})
+		return
+	}
 
 	if input.HTML == "" {
 		render.Status(r, http.StatusBadRequest)
@@ -63,35 +67,35 @@ func htmlHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	filename := fmt.Sprintf("/tmp/%s.html", r.Header.Get("X-Request-Id"))
-
-	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
+	file, err := os.CreateTemp("", "ratiocheck-*.html")
 	if err != nil {
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
-		log.Printf("[%s] %e", r.Header.Get("X-Request-Id"), err)
+		log.Printf("[%s] %v", r.Header.Get("X-Request-Id"), err)
 		return
 	}
+	filename := file.Name()
+	defer func() { _ = os.Remove(filename) }()
 
 	if _, err := file.WriteString(input.HTML); err != nil {
+		_ = file.Close()
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
-		log.Printf("[%s] %e", r.Header.Get("X-Request-Id"), err)
+		log.Printf("[%s] %v", r.Header.Get("X-Request-Id"), err)
 		return
 	}
 
 	if err := file.Close(); err != nil {
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
-		log.Printf("[%s] %e", r.Header.Get("X-Request-Id"), err)
+		log.Printf("[%s] %v", r.Header.Get("X-Request-Id"), err)
 		return
 	}
-	defer os.Remove(filename)
 
-	if resp, err := ratio.Get(context.Background(), fmt.Sprintf("file://%s", filename)); err != nil {
+	if resp, err := ratio.Get(r.Context(), fmt.Sprintf("file://%s", filename)); err != nil {
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
-		log.Printf("[%s] %e", r.Header.Get("X-Request-Id"), err)
+		log.Printf("[%s] %v", r.Header.Get("X-Request-Id"), err)
 	} else {
 		render.JSON(w, r, resp)
 	}
@@ -99,7 +103,11 @@ func htmlHandler(w http.ResponseWriter, r *http.Request) {
 
 func urlHandler(w http.ResponseWriter, r *http.Request) {
 	var input request
-	json.NewDecoder(r.Body).Decode(&input)
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		render.Status(r, http.StatusBadRequest)
+		render.JSON(w, r, map[string]string{"error": "invalid json"})
+		return
+	}
 
 	if input.URL == "" {
 		render.Status(r, http.StatusBadRequest)
@@ -107,7 +115,7 @@ func urlHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if resp, err := ratio.Get(context.Background(), input.URL); err != nil {
+	if resp, err := ratio.Get(r.Context(), input.URL); err != nil {
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
 	} else {
