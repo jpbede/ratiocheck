@@ -75,10 +75,10 @@ func htmlHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	filename := file.Name()
-	defer os.Remove(filename)
+	defer func() { _ = os.Remove(filename) }()
 
 	if _, err := file.WriteString(input.HTML); err != nil {
-		file.Close()
+		_ = file.Close()
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, map[string]string{"error": err.Error()})
 		log.Printf("[%s] %v", r.Header.Get("X-Request-Id"), err)
