@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	"github.com/jpbede/ratiocheck/pkg/ratio"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"log"
 	"net/http"
 	"os"
@@ -35,7 +35,7 @@ func Listen() *cli.Command {
 	}
 }
 
-func runListen(c *cli.Context) error {
+func runListen(_ context.Context, c *cli.Command) error {
 	port := c.String("port")
 
 	r := chi.NewRouter()
