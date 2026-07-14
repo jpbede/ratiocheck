@@ -5,7 +5,7 @@ go 1.26
 toolchain go1.26.4
 
 require (
-	github.com/chromedp/cdproto v0.0.0-20260704091341-6ca7914c3938
+	github.com/chromedp/cdproto v0.0.0-20260714002449-7ad0ec4e4115
 	github.com/chromedp/chromedp v0.15.1
 	github.com/go-chi/chi/v5 v5.3.0
 	github.com/go-chi/render v1.0.3
